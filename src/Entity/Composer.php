@@ -5,7 +5,8 @@
 
 namespace App\Entity;
 
-use App\Repository\ComposerRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -42,6 +43,21 @@ class Composer
      * @ORM\Column(type="text", nullable=true, length=65535)
      */
     private $bio;
+
+    /**
+     * Musical.
+     *
+     * @ORM\ManyToMany(targetEntity=Musical::class, mappedBy="composer")
+     */
+    private $musicals;
+
+    /**
+     * Composer constructor.
+     */
+    public function __construct()
+    {
+        $this->musicals = new ArrayCollection();
+    }
 
     /**
      * Getter for Id.
@@ -91,5 +107,48 @@ class Composer
     public function setBio(?string $bio): void
     {
         $this->bio = $bio;
+    }
+
+    /**
+     * Getter for Musical.
+     *
+     * @return Collection|Musical[] Musical
+     */
+    public function getMusicals(): Collection
+    {
+        return $this->musicals;
+    }
+
+    /**
+     * Adder for Musical.
+     *
+     * @param Musical $musical Musical
+     *
+     * @return $this
+     */
+    public function addMusical(Musical $musical): self
+    {
+        if (!$this->musicals->contains($musical)) {
+            $this->musicals[] = $musical;
+            $musical->addComposer($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * Remover for Musical.
+     *
+     * @param Musical $musical Musical
+     *
+     * @return $this
+     */
+    public function removeMusical(Musical $musical): self
+    {
+        if ($this->musicals->removeElement($musical)) {
+            $musical->removeComposer($this);
+        }
+
+        return $this;
     }
 }

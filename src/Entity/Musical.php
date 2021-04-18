@@ -5,6 +5,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -53,6 +55,43 @@ class Musical
      *     length=65535)
      */
     private $description;
+
+    /**
+     * Song.
+     *
+     * @ORM\OneToMany(targetEntity=Song::class, mappedBy="musical")
+     */
+    private $songs;
+
+    /**
+     * Director.
+     *
+     * @ORM\ManyToMany(targetEntity=Director::class, inversedBy="musicals")
+     */
+    private $director;
+
+    /**
+     * Composer.
+     *
+     * @ORM\ManyToMany(targetEntity=Composer::class, inversedBy="musicals")
+     */
+    private $composer;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Actor::class, inversedBy="musicals")
+     */
+    private $actor;
+
+    /**
+     * Musical constructor.
+     */
+    public function __construct()
+    {
+        $this->songs = new ArrayCollection();
+        $this->director = new ArrayCollection();
+        $this->composer = new ArrayCollection();
+        $this->actor = new ArrayCollection();
+    }
 
     /**
      * Getter for Id.
@@ -122,5 +161,171 @@ class Musical
     public function setDescription(string $description): void
     {
         $this->description = $description;
+    }
+
+    /**
+     * Getter for Song.
+     *
+     * @return Collection|Song[] Song
+     */
+    public function getSongs(): Collection
+    {
+        return $this->songs;
+    }
+
+    /**
+     * Adder for Song.
+     *
+     * @param Song $song Song
+     *
+     * @return $this
+     */
+    public function addSong(Song $song): self
+    {
+        if (!$this->songs->contains($song)) {
+            $this->songs[] = $song;
+            $song->setMusical($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * Remover for Song.
+     *
+     * @param Song $song Song
+     *
+     * @return $this
+     */
+    public function removeSong(Song $song): self
+    {
+        if ($this->songs->removeElement($song)) {
+            // set the owning side to null (unless already changed)
+            if ($song->getMusical() === $this) {
+                $song->setMusical(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * Getter for Director.
+     *
+     * @return Collection|Director[] Director
+     */
+    public function getDirector(): Collection
+    {
+        return $this->director;
+    }
+
+    /**
+     * Adder for Director.
+     *
+     * @param Director $director Director
+     *
+     * @return $this
+     */
+    public function addDirector(Director $director): self
+    {
+        if (!$this->director->contains($director)) {
+            $this->director[] = $director;
+        }
+
+        return $this;
+    }
+
+    /**
+     * Remover for Director.
+     *
+     * @param Director $director Director
+     *
+     * @return $this
+     */
+    public function removeDirector(Director $director): self
+    {
+        $this->director->removeElement($director);
+
+        return $this;
+    }
+
+    /**
+     * Getter for Composer.
+     *
+     * @return Collection|Composer[] Composer
+     */
+    public function getComposer(): Collection
+    {
+        return $this->composer;
+    }
+
+    /**
+     * Adder for Composer.
+     *
+     * @param Composer $composer Composer
+     *
+     * @return $this
+     */
+    public function addComposer(Composer $composer): self
+    {
+        if (!$this->composer->contains($composer)) {
+            $this->composer[] = $composer;
+        }
+
+        return $this;
+    }
+
+    /**
+     * Remover for Composer.
+     *
+     * @param Composer $composer Composer
+     *
+     * @return $this
+     */
+    public function removeComposer(Composer $composer): self
+    {
+        $this->composer->removeElement($composer);
+
+        return $this;
+    }
+
+    /**
+     * Getter for Actor.
+     *
+     * @return Collection|Actor[] Actor
+     */
+    public function getActor(): Collection
+    {
+        return $this->actor;
+    }
+
+    /**
+     * Adder for Actor.
+     *
+     * @param Actor $actor Actor
+     *
+     * @return $this
+     */
+    public function addActor(Actor $actor): self
+    {
+        if (!$this->actor->contains($actor)) {
+            $this->actor[] = $actor;
+        }
+
+        return $this;
+    }
+
+    /**
+     * Remover for Actor.
+     *
+     * @param Actor $actor Actor
+     *
+     * @return $this
+     */
+    public function removeActor(Actor $actor): self
+    {
+        $this->actor->removeElement($actor);
+
+        return $this;
     }
 }

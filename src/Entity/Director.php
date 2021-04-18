@@ -6,6 +6,8 @@
 namespace App\Entity;
 
 use App\Repository\DirectorRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -44,6 +46,21 @@ class Director
      * @ORM\Column(type="text", nullable=true, length=65535)
      */
     private $bio;
+
+    /**
+     * Musical.
+     *
+     * @ORM\ManyToMany(targetEntity=Musical::class, mappedBy="director")
+     */
+    private $musicals;
+
+    /**
+     * Director constructor.
+     */
+    public function __construct()
+    {
+        $this->musicals = new ArrayCollection();
+    }
 
     /**
      * Getter for Id.
@@ -93,5 +110,48 @@ class Director
     public function setBio(?string $bio): void
     {
         $this->bio = $bio;
+    }
+
+    /**
+     * Getter for Musical.
+     *
+     * @return Collection|Musical[] Musical
+     */
+    public function getMusicals(): Collection
+    {
+        return $this->musicals;
+    }
+
+    /**
+     * Adder for Musical.
+     *
+     * @param Musical $musical Musical
+     *
+     * @return $this
+     */
+    public function addMusical(Musical $musical): self
+    {
+        if (!$this->musicals->contains($musical)) {
+            $this->musicals[] = $musical;
+            $musical->addDirector($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * Remover for Musical.
+     *
+     * @param Musical $musical Musical
+     *
+     * @return $this
+     */
+    public function removeMusical(Musical $musical): self
+    {
+        if ($this->musicals->removeElement($musical)) {
+            $musical->removeDirector($this);
+        }
+
+        return $this;
     }
 }
