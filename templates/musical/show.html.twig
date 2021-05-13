@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ 'Doceń musical'|trans({'%id%': musical.id|default('')}) }}
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="cover-photo">
+            COVER PHOTO
+        </div>
+        <div class="musical-data">
+            <div class="name">
+                {{ musical.title }}
+            </div>
+            <div class="creator">
+                <h2>Twórcy</h2>
+                {% for director in musical.director %}
+                    <a href="{{ url('director_show', {id: director.id}) }}" title="{{ director.name }}">
+                        {{ director.name }}
+                    </a><br>
+                {% endfor %}
+                {% for composer in musical.composer %}
+                <a href="{{ url('composer_show', {id: composer.id}) }}" title="{{ composer.name }}">
+                    {{ composer.name }}
+                </a><br>
+                {% endfor %}
+            </div>
+
+            <div class="premiere">
+                <h2>Premiera</h2>
+                {{ musical.year }}
+                {{ musical.place }}
+            </div>
+        </div>
+
+        <h1>historia</h1>
+        <div class="content">
+            {{ musical.history }}
+        </div>
+        <h1>fabuła</h1>
+        <div class="content">
+            {{ musical.description }}
+        </div>
+    </div>
+{% endblock %}

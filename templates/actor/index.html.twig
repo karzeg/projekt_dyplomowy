@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ 'Aktorzy' }}
+{% endblock %}
+
+{% block body %}
+    <h1>aktorzy</h1>
+    <div class="grid-container">
+        {% for actor in pagination.items %}
+            <a href="{{ url('actor_show', {id: actor.id}) }}">
+                <div class="grid-item">
+                    <div class="musical">
+                        {{ actor.name }}
+                    </div>
+                </div>
+            </a>
+        {% endfor %}
+    </div>
+
+    <div class="pagination">
+        {{ knp_pagination_render(pagination) }}
+    </div>
+{% endblock %}

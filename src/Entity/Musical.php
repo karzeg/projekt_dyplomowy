@@ -47,6 +47,16 @@ class Musical
     private $year;
 
     /**
+     * Place.
+     *
+     * @var string
+     *
+     * @ORM\Column(type="string",
+     *     length=100)
+     */
+    private $place;
+
+    /**
      * Description.
      *
      * @var string
@@ -55,6 +65,17 @@ class Musical
      *     length=65535)
      */
     private $description;
+
+    /**
+     * History.
+     *
+     * @var string
+     *
+     * @ORM\Column(type="text",
+     *     length=65535,
+     *     nullable=true)
+     */
+    private $history;
 
     /**
      * Song.
@@ -325,6 +346,54 @@ class Musical
     public function removeActor(Actor $actor): self
     {
         $this->actor->removeElement($actor);
+
+        return $this;
+    }
+
+    /**
+     * Getter for History.
+     *
+     * @return string|null History
+     */
+    public function getHistory(): ?string
+    {
+        return $this->history;
+    }
+
+    /**
+     * Setter for History.
+     *
+     * @param string|null $history
+     *
+     * @return $this
+     */
+    public function setHistory(?string $history): self
+    {
+        $this->history = $history;
+
+        return $this;
+    }
+
+    /**
+     * Getter for Place.
+     *
+     * @return string|null
+     */
+    public function getPlace(): ?string
+    {
+        return $this->place;
+    }
+
+    /**
+     * Setter for Place.
+     *
+     * @param string $place
+     *
+     * @return $this
+     */
+    public function setPlace(string $place): self
+    {
+        $this->place = $place;
 
         return $this;
     }
