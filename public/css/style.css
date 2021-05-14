@@ -1,3 +1,8 @@
+.html
+{
+    scroll-behavior: smooth;
+}
+
 body
 {
     background-color: #f2f2f2;
@@ -54,19 +59,16 @@ h1
     padding: 6em 3em;
 }
 
+.musical-container
+{
+    width: 80%;
+    margin: auto;
+}
+
 .pagination
 {
     margin: 1em auto;
     padding: 0.5em;
-}
-
-footer
-{
-    background-color: #2e2e2e;
-    color: #f2f2f2;
-    padding: 2em;
-    margin-top: 2em;
-    text-align: center;
 }
 
 nav
@@ -209,6 +211,16 @@ li > a:only-child:after
 {
     margin: 1em 0 2em 0;
 }
+
+footer
+{
+    background-color: #2e2e2e;
+    color: #f2f2f2;
+    padding: 2em;
+    margin-top: 2em;
+    text-align: center;
+}
+
 @media all and (max-width : 768px)
 {
     nav

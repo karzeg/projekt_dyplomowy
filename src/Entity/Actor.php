@@ -5,10 +5,11 @@
 
 namespace App\Entity;
 
-use App\Repository\ActorRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Class Actor.
@@ -35,6 +36,10 @@ class Actor
      * @var string
      *
      * @ORM\Column(type="string", length=200)
+     *
+     * @Assert\Type(type="string")
+     * @Assert\NotBlank
+     * @Assert\Length(min="3", max="200")
      */
     private $name;
 
@@ -44,6 +49,9 @@ class Actor
      * @var string
      *
      * @ORM\Column(type="text", nullable=true, length=65535)
+     *
+     * @Assert\Type(type="text")
+     * @Assert\Length(min="50", max="65535")
      */
     private $bio;
 
@@ -53,13 +61,6 @@ class Actor
      * @ORM\ManyToMany(targetEntity=Musical::class, mappedBy="actor")
      */
     private $musicals;
-
-    /**
-     * Song.
-     *
-     * @ORM\ManyToMany(targetEntity=Song::class, mappedBy="actor")
-     */
-    private $songs;
 
     /**
      * Actor constructor.
@@ -158,49 +159,6 @@ class Actor
     {
         if ($this->musicals->removeElement($musical)) {
             $musical->removeActor($this);
-        }
-
-        return $this;
-    }
-
-    /**
-     * Getter for Song.
-     *
-     * @return Collection|Song[] Song
-     */
-    public function getSongs(): Collection
-    {
-        return $this->songs;
-    }
-
-    /**
-     * Adder for Song.
-     *
-     * @param Song $song Song
-     *
-     * @return $this
-     */
-    public function addSong(Song $song): self
-    {
-        if (!$this->songs->contains($song)) {
-            $this->songs[] = $song;
-            $song->addActor($this);
-        }
-
-        return $this;
-    }
-
-    /**
-     * Remover for Song.
-     *
-     * @param Song $song Song
-     *
-     * @return $this
-     */
-    public function removeSong(Song $song): self
-    {
-        if ($this->songs->removeElement($song)) {
-            $song->removeActor($this);
         }
 
         return $this;

@@ -8,6 +8,8 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Class Song.
@@ -34,6 +36,10 @@ class Song
      * @var string
      *
      * @ORM\Column(type="string", length=255)
+     *
+     * @Assert\Type(type="string")
+     * @Assert\NotBlank
+     * @Assert\Length(min="1", max="255")
      */
     private $title;
 
@@ -44,19 +50,6 @@ class Song
      * @ORM\JoinColumn(nullable=false)
      */
     private $musical;
-
-    /**
-     * @ORM\ManyToMany(targetEntity=Actor::class, inversedBy="songs")
-     */
-    private $actor;
-
-    /**
-     * Song constructor.
-     */
-    public function __construct()
-    {
-        $this->actor = new ArrayCollection();
-    }
 
     /**
      * Getter for Id.
@@ -108,46 +101,6 @@ class Song
     public function setMusical(?Musical $musical): self
     {
         $this->musical = $musical;
-
-        return $this;
-    }
-
-    /**
-     * Getter for Actor.
-     *
-     * @return Collection|Actor[] Actor
-     */
-    public function getActor(): Collection
-    {
-        return $this->actor;
-    }
-
-    /**
-     * Adder for Actor.
-     *
-     * @param Actor $actor Actor
-     *
-     * @return $this
-     */
-    public function addActor(Actor $actor): self
-    {
-        if (!$this->actor->contains($actor)) {
-            $this->actor[] = $actor;
-        }
-
-        return $this;
-    }
-
-    /**
-     * Remover for Actor.
-     *
-     * @param Actor $actor
-     *
-     * @return $this
-     */
-    public function removeActor(Actor $actor): self
-    {
-        $this->actor->removeElement($actor);
 
         return $this;
     }

@@ -8,8 +8,12 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
+ * Class Composer.
+ *
  * @ORM\Entity(repositoryClass="App\Repository\ComposerRepository")
  * @ORM\Table(name="composers")
  */
@@ -32,6 +36,10 @@ class Composer
      * @var string
      *
      * @ORM\Column(type="string", length=200)
+     *
+     * @Assert\Type(type="string")
+     * @Assert\NotBlank
+     * @Assert\Length(min="3", max="200")
      */
     private $name;
 
@@ -41,6 +49,9 @@ class Composer
      * @var string
      *
      * @ORM\Column(type="text", nullable=true, length=65535)
+     *
+     * @Assert\Type(type="text")
+     * @Assert\Length(min="1", max="65535")
      */
     private $bio;
 

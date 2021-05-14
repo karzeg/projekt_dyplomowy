@@ -8,6 +8,8 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Class Musical.
@@ -34,6 +36,10 @@ class Musical
      * @var string
      *
      * @ORM\Column(type="string", length=100)
+     *
+     * @Assert\Type(type="string")
+     * @Assert\NotBlank
+     * @Assert\Length(min="3", max="100")
      */
     private $title;
 
@@ -43,6 +49,9 @@ class Musical
      * @var int
      *
      * @ORM\Column(type="integer")
+     *
+     * @Assert\NotBlank
+     * @Assert\Type(type="int")
      */
     private $year;
 
@@ -51,8 +60,11 @@ class Musical
      *
      * @var string
      *
-     * @ORM\Column(type="string",
-     *     length=100)
+     * @ORM\Column(type="string", length=100)
+     *
+     * @Assert\Type(type="string")
+     * @Assert\NotBlank
+     * @Assert\Length(min="1", max="100")
      */
     private $place;
 
@@ -61,8 +73,11 @@ class Musical
      *
      * @var string
      *
-     * @ORM\Column(type="text",
-     *     length=65535)
+     * @ORM\Column(type="text", length=65535)
+     *
+     * @Assert\Type(type="text")
+     * @Assert\NotBlank
+     * @Assert\Length(min="1", max="65535")
      */
     private $description;
 
@@ -71,9 +86,10 @@ class Musical
      *
      * @var string
      *
-     * @ORM\Column(type="text",
-     *     length=65535,
-     *     nullable=true)
+     * @ORM\Column(type="text", length=65535, nullable=true)
+     *
+     * @Assert\Type(type="text")
+     * @Assert\Length(min="1", max="65535")
      */
     private $history;
 
@@ -87,19 +103,19 @@ class Musical
     /**
      * Director.
      *
-     * @ORM\ManyToMany(targetEntity=Director::class, inversedBy="musicals")
+     * @ORM\ManyToMany(targetEntity=Director::class, inversedBy="musical")
      */
     private $director;
 
     /**
      * Composer.
      *
-     * @ORM\ManyToMany(targetEntity=Composer::class, inversedBy="musicals")
+     * @ORM\ManyToMany(targetEntity=Composer::class, inversedBy="musical")
      */
     private $composer;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Actor::class, inversedBy="musicals")
+     * @ORM\ManyToMany(targetEntity=Actor::class, inversedBy="musical")
      */
     private $actor;
 

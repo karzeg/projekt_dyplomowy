@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block body %}
-    <div class="container">
+    <div class="musical-container">
         <div class="cover-photo">
             COVER PHOTO
         </div>
@@ -42,5 +42,20 @@
         <div class="content">
             {{ musical.description }}
         </div>
+        <h1>aktorzy</h1>
+        <div class="content">
+            {% for actor in musical.actor %}
+                <a href="{{ url('actor_show', {id: actor.id}) }}" title="{{ actor.name }}">
+                    {{ actor.name }}
+                </a><br>
+            {% endfor %}
+        </div>
+        <h1>utwory</h1>
+        <div class="content">
+            {% for songs in musical.songs %}
+                    {{ songs.title }}
+            {% endfor %}
+        </div>
+        <h1>komentarze</h1>
     </div>
 {% endblock %}

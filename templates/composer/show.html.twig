@@ -5,5 +5,30 @@
 {% endblock %}
 
 {% block body %}
-
+    <div class="grid-container-creator">
+        <div class="creator-photo">
+            PHOTO
+        </div>
+        <div class="creator-data">
+            <div class="name">
+                {{ composer.name }}
+            </div>
+            <h2>
+                Biografia
+            </h2>
+            <div class="bio">
+                {{ composer.bio }}
+            </div>
+            <h2>
+                Spektakle
+            </h2>
+            <div class="creator">
+                {% for musicals in composer.musicals %}
+                    <a href="{{ url('musical_show', {id: musicals.id}) }}" title="{{ musicals.title }}">
+                        {{ musicals.title }}
+                    </a><br>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
 {% endblock %}
