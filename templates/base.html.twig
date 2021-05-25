@@ -33,7 +33,15 @@
                     </ul>
                 </li>
                 <li><a href="{{ url('o-serwisie') }}">O serwisie</a></li>
-                <li><a href="#">Zaloguj</a></li>
+
+                {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+                    <li><a href="{{ url('user_show', {id: app.user.id}) }}"> {{ app.user.email }} </a></li>
+                    <li><a href="{{ url('app_logout') }}">Wyloguj</a></li>
+
+                {% else %}
+                    <li><a href="{{ url('app_login') }}">Zaloguj</a></li>
+                {% endif %}
+
             </ul>
         </nav>
 

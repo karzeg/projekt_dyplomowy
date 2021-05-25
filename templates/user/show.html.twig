@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ 'Doceń musical | Konto użytkownika' }}
+{% endblock %}
+
+{% block body %}
+    <h1>profil</h1>
+    {% if user is defined and user|length %}
+        <div class="musical-container">
+            <dt>{{ 'nazwa użytkownika' }}</dt>
+            <dt>{{ 'e-mail' }}</dt>
+            <dd>{{ user.email }}</dd>
+        </div>
+    {% else %}
+        <p>
+            {{ 'message_item_not_found'|trans }}
+        </p>
+    {% endif %}
+{% endblock %}

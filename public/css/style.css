@@ -1,4 +1,4 @@
-.html
+html
 {
     scroll-behavior: smooth;
 }
@@ -219,6 +219,15 @@ footer
     padding: 2em;
     margin-top: 2em;
     text-align: center;
+}
+
+form
+{
+    padding: 2em;
+    width: 60%;
+    margin: 1em auto;
+    text-align: center;
+    line-height: 2em;
 }
 
 @media all and (max-width : 768px)
