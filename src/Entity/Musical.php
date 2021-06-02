@@ -120,6 +120,17 @@ class Musical
     private $actor;
 
     /**
+     * @ORM\OneToMany(targetEntity=Favourite::class, mappedBy="musical")
+     */
+    private $favourites;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="musical")
+     */
+    private $comments;
+
+
+    /**
      * Musical constructor.
      */
     public function __construct()
@@ -128,6 +139,8 @@ class Musical
         $this->director = new ArrayCollection();
         $this->composer = new ArrayCollection();
         $this->actor = new ArrayCollection();
+        $this->favourites = new ArrayCollection();
+        $this->comments = new ArrayCollection();
     }
 
     /**
@@ -412,5 +425,69 @@ class Musical
         $this->place = $place;
 
         return $this;
+    }
+
+    /**
+     * @return Collection|Favourite[]
+     */
+    public function getFavourites(): Collection
+    {
+        return $this->favourites;
+    }
+
+    /**
+     * @param Favourite $favourite
+     */
+    public function addFavourite(Favourite $favourite): void
+    {
+        if (!$this->favourites->contains($favourite)) {
+            $this->favourites[] = $favourite;
+            $favourite->setMusical($this);
+        }
+    }
+
+    /**
+     * @param Favourite $favourite
+     */
+    public function removeFavourite(Favourite $favourite): void
+    {
+        if ($this->favourites->removeElement($favourite)) {
+            // set the owning side to null (unless already changed)
+            if ($favourite->getMusical() === $this) {
+                $favourite->setMusical(null);
+            }
+        }
+    }
+
+    /**
+     * @return Collection|Comment[]
+     */
+    public function getComments(): Collection
+    {
+        return $this->comments;
+    }
+
+    /**
+     * @param Comment $comment
+     */
+    public function addComment(Comment $comment): void
+    {
+        if (!$this->comments->contains($comment)) {
+            $this->comments[] = $comment;
+            $comment->setMusical($this);
+        }
+    }
+
+    /**
+     * @param Comment $comment
+     */
+    public function removeComment(Comment $comment): void
+    {
+        if ($this->comments->removeElement($comment)) {
+            // set the owning side to null (unless already changed)
+            if ($comment->getMusical() === $this) {
+                $comment->setMusical(null);
+            }
+        }
     }
 }

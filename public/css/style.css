@@ -42,6 +42,11 @@ h1
     margin: 0 auto -0.1em;
 }
 
+.every-con
+{
+    width: 90%;
+    margin: auto;
+}
 .grid-container
 {
     display: grid;
@@ -70,7 +75,12 @@ h1
     margin: 1em auto;
     padding: 0.5em;
 }
-
+.container-fluid
+{
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
 nav
 {
     margin: 0.5em 3em 0 0;
@@ -218,16 +228,37 @@ footer
     color: #f2f2f2;
     padding: 2em;
     margin-top: 2em;
-    text-align: center;
+}
+
+footer img
+{
+    text-align: left;
+}
+
+footer p
+{
+    text-align: right;
+    display: inline-block;
 }
 
 form
 {
     padding: 2em;
     width: 60%;
-    margin: 1em auto;
+    margin: 0.5em auto;
     text-align: center;
     line-height: 2em;
+}
+
+.reg
+{
+    line-height: 5em;
+}
+
+.reg a
+{
+    color: #ffaa81;
+    font-weight: bolder;
 }
 
 @media all and (max-width : 768px)

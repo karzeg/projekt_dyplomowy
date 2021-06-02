@@ -8,9 +8,21 @@
     <h1>profil</h1>
     {% if user is defined and user|length %}
         <div class="musical-container">
-            <dt>{{ 'nazwa użytkownika' }}</dt>
-            <dt>{{ 'e-mail' }}</dt>
-            <dd>{{ user.email }}</dd>
+            <div class="">
+                <p>nazwa użytkownika:
+                    {{ app.user.login }}
+                </p>
+            </div>
+            <div class="">
+                <p>email:
+                     {{ app.user.email }}
+                </p>
+            </div>
+            <div class="">
+                <p>skomentowane
+
+                </p>
+            </div>
         </div>
     {% else %}
         <p>

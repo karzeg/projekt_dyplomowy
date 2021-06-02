@@ -1,0 +1,13 @@
+{% include 'default/_form.html.twig' with {
+    page_title: 'treść',
+    page_title_param: {'%id': musical},
+    attr: {
+        method: 'POST',
+        action: url('dodaj-komentarz', {'id': musical})
+    },
+    form: form,
+    submit_label: 'action_create'|trans,
+    back_to_list_path: 'musical_index',
+
+} %}
+{# powrot do poprzedniego zamiast do glownej #}

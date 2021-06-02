@@ -7,7 +7,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\ChangePasswordType;
-use App\Service\UserService;
+//use App\Service\UserService;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -28,15 +28,15 @@ class UserController extends AbstractController
      */
     private $userService;
 
-    /**
-     * UserController constructor.
-     *
-     * @param \App\Service\UserService $userService User service
-     */
-    public function __construct(UserService $userService)
-    {
-        $this->userService = $userService;
-    }
+//    /**
+//     * UserController constructor.
+//     *
+//     * @param \App\Service\UserService $userService User service
+//     */
+//    public function __construct(UserService $userService)
+//    {
+//        $this->userService = $userService;
+//    }
 
     /**
      * Password encoder.
@@ -88,6 +88,10 @@ class UserController extends AbstractController
      *
      * @Route("user/{id}", name="user_show")
      *
+     * @Security(
+     *     "is_granted('ROLE_ADMIN') or is_granted('EDIT', userr)"
+     * )
+     *
      * @return Response
      */
     public function show(User $userr): Response
@@ -95,56 +99,6 @@ class UserController extends AbstractController
         return $this->render(
             'user/show.html.twig',
             ['user' => $userr]
-        );
-    }
-
-    /**
-     * Change password action.
-     *
-     * @param \Symfony\Component\HttpFoundation\Request                             $request         HTTP request
-     * @param \App\Entity\User                                                      $userr           User entity
-     * @param \Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface $passwordEncoder Password encoder
-     *
-     * @return \Symfony\Component\HttpFoundation\Response HTTP response
-     *
-     * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\OptimisticLockException
-     *
-     * @Route(
-     *     "change_password/{id}",
-     *     methods={"GET", "PUT"},
-     *     requirements={"id": "[1-9]\d*"},
-     *     name="change_password",
-     * )
-     *
-     * @Security(
-     *     "is_granted('ROLE_ADMIN') or is_granted('EDIT', userr)"
-     * )
-     */
-    public function changePassword(Request $request, User $userr, UserPasswordEncoderInterface $passwordEncoder): Response
-    {
-        $form = $this->createForm(ChangePasswordType::class, $userr, ['method' => 'PUT']);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $userr->setPassword(
-                $passwordEncoder->encodePassword(
-                    $userr,
-                    $form->get('password')->getData()
-                )
-            );
-            $this->userService->save($userr);
-            $this->addFlash('success', 'message_password_changed_successfully');
-
-            return $this->redirectToRoute('user_show', ['id' => $userr->getId()]);
-        }
-
-        return $this->render(
-            'user/change_pass.html.twig',
-            [
-                'form' => $form->createView(),
-                'user' => $userr,
-            ]
         );
     }
 }

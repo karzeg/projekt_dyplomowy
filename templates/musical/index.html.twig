@@ -6,19 +6,21 @@
 
 {% block body %}
     <h1>musicale</h1>
-    <div class="grid-container">
-    {% for musical in pagination.items %}
-        <a href="{{ url('musical_show', {id: musical.id}) }}">
-            <div class="grid-item">
-                <div class="musical">
-                    {{ musical.title }}
+    <div class="every-con">
+        <div class="grid-container">
+        {% for musical in pagination.items %}
+            <a href="{{ url('musical_show', {id: musical.id}) }}">
+                <div class="grid-item">
+                    <div class="musical">
+                        {{ musical.title }}
+                    </div>
                 </div>
-            </div>
-         </a>
-    {% endfor %}
-    </div>
+            </a>
+        {% endfor %}
+        </div>
 
-    <div class="pagination">
+        <div class="pagination">
         {{ knp_pagination_render(pagination) }}
+        </div>
     </div>
 {% endblock %}

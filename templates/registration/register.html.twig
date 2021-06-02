@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ 'Załóż konto' }}
+{% endblock %}
+
+{% block body %}
+    <h1>{{ 'nowe konto' }}</h1>
+
+    {{ form_start(registrationForm) }}
+    {{ form_row(registrationForm.email) }}
+    {{ form_row(registrationForm.login) }}
+    {{ form_row(registrationForm.password) }}
+
+    <button type="submit" class="btn btn-secondary">
+        {{ 'utwórz' }}
+    </button>
+    {{ form_end(registrationForm) }}
+
+{% endblock %}
