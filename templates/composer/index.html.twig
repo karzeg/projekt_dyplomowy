@@ -12,7 +12,7 @@
             <div class="row text-center text-lg-center">
                 {% for composer in pagination.items %}
 
-                    <div class="col-lg-3 col-md-4 col-22 text-lg-center">
+                    <div class="col-lg-3 col-md-3 col-12 text-center">
                         <div class="container-href">
                             <a href="{{ url('composer_show', {id: composer.id}) }}" class="d-block mb-4 h-200">
                                 <img class="img-fluid img-thumbnail" src="{{ asset('uploads/'~ composer.filename) }}" alt="">

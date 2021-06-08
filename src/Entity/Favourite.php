@@ -29,6 +29,11 @@ class Favourite
     private $musical;
 
     /**
+     * @ORM\ManyToOne(targetEntity=User::class)
+     */
+    private $user;
+
+    /**
      * @return int|null
      */
     public function getId(): ?int
@@ -50,5 +55,21 @@ class Favourite
     public function setMusical(?Musical $musical): void
     {
         $this->musical = $musical;
+    }
+
+    /**
+     * @return User|null
+     */
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    /**
+     * @param User|null $user
+     */
+    public function setUser(?User $user): void
+    {
+        $this->user = $user;
     }
 }
