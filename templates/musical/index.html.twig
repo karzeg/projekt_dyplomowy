@@ -7,16 +7,19 @@
 {% block body %}
     <h1>musicale</h1>
     <div class="every-con">
-        <div class="grid-container">
-        {% for musical in pagination.items %}
-            <a href="{{ url('musical_show', {id: musical.id}) }}">
-                <div class="grid-item">
-                    <div class="musical">
-                        {{ musical.title }}
-                    </div>
+        <div class="container">
+
+            <div class="row text-center text-lg-center">
+                {% for musical in pagination.items %}
+
+                <div class="col-lg-3 col-md-4 col-22 text-lg-center">
+                    <a href="{{ url('musical_show', {id: musical.id}) }}" class="d-block mb-4 h-200">
+                        <img class="img-fluid img-thumbnail" src="{{ asset('uploads/'~ musical.filename) }}" alt="">
+                    </a>
                 </div>
-            </a>
-        {% endfor %}
+                {% endfor %}
+            </div>
+
         </div>
 
         <div class="pagination">

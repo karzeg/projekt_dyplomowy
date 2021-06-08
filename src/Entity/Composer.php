@@ -63,6 +63,11 @@ class Composer
     private $musicals;
 
     /**
+     * @ORM\Column(type="string", length=200)
+     */
+    private $filename;
+
+    /**
      * Composer constructor.
      */
     public function __construct()
@@ -159,6 +164,18 @@ class Composer
         if ($this->musicals->removeElement($musical)) {
             $musical->removeComposer($this);
         }
+
+        return $this;
+    }
+
+    public function getFilename(): ?string
+    {
+        return $this->filename;
+    }
+
+    public function setFilename(string $filename): self
+    {
+        $this->filename = $filename;
 
         return $this;
     }

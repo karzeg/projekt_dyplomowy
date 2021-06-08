@@ -63,6 +63,11 @@ class Director
     private $musicals;
 
     /**
+     * @ORM\Column(type="string", length=200)
+     */
+    private $filename;
+
+    /**
      * Director constructor.
      */
     public function __construct()
@@ -159,6 +164,18 @@ class Director
         if ($this->musicals->removeElement($musical)) {
             $musical->removeDirector($this);
         }
+
+        return $this;
+    }
+
+    public function getFilename(): ?string
+    {
+        return $this->filename;
+    }
+
+    public function setFilename(string $filename): self
+    {
+        $this->filename = $filename;
 
         return $this;
     }

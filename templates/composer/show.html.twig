@@ -5,9 +5,9 @@
 {% endblock %}
 
 {% block body %}
-    <div class="grid-container-creator">
+    <div class="musical-container">
         <div class="creator-photo">
-            PHOTO
+            <img class="nav-profile-img" src="{{ asset('uploads/'~ composer.filename) }}" alt="">
         </div>
         <div class="creator-data">
             <div class="name">
@@ -24,9 +24,16 @@
             </h2>
             <div class="creator">
                 {% for musicals in composer.musicals %}
-                    <a href="{{ url('musical_show', {id: musicals.id}) }}" title="{{ musicals.title }}">
-                        {{ musicals.title }}
-                    </a><br>
+                    <div class="col-lg-3 col-md-4 col-22 text-lg-center">
+                        <div class="container-href">
+                            <a href="{{ url('musical_show', {id: musicals.id}) }}" title="{{ musicals.title }}" class="d-block mb-4 h-200">
+                                <img class="img-fluid img-thumbnail" src="{{ asset('uploads/'~ musicals.filename) }}" alt="">
+                                <div>
+                                    {{ musicals.title }}
+                                </div>
+                            </a>
+                        </div>
+                    </div>
                 {% endfor %}
             </div>
         </div>

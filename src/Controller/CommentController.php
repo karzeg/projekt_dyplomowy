@@ -7,7 +7,6 @@ namespace App\Controller;
 
 use App\Entity\Comment;
 use App\Entity\Musical;
-use App\Entity\UserData;
 use App\Entity\User;
 use App\Form\CommentType;
 use App\Service\CommentService;
@@ -69,6 +68,7 @@ class CommentController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $comment->setMusical($musical);
             $comment->setAuthor($this->getUser());
+            $comment->setDate(new \DateTime());
             $this->commentService->save($comment);
             $this->addFlash('success', 'comment_created_successfully');
 

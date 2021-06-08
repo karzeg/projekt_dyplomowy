@@ -129,6 +129,10 @@ class Musical
      */
     private $comments;
 
+    /**
+     * @ORM\Column(type="string", length=200)
+     */
+    private $filename;
 
     /**
      * Musical constructor.
@@ -489,5 +493,21 @@ class Musical
                 $comment->setMusical(null);
             }
         }
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getFilename(): ?string
+    {
+        return $this->filename;
+    }
+
+    /**
+     * @param string $filename
+     */
+    public function setFilename(string $filename): void
+    {
+        $this->filename = $filename;
     }
 }

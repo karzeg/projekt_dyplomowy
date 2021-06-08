@@ -5,8 +5,9 @@
 
 namespace App\Entity;
 
-use App\Repository\CommentRepository;
+use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
+use PHP_CodeSniffer\Tests\Core\File\testFECNExtendedClass;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\CommentRepository")
@@ -15,6 +16,10 @@ use Doctrine\ORM\Mapping as ORM;
 class Comment
 {
     /**
+     * Id.
+     *
+     * @var int
+     *
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
@@ -22,6 +27,9 @@ class Comment
     private $id;
 
     /**
+     * Content
+     *
+     * @var string
      * @ORM\Column(type="text")
      */
     private $content;
@@ -36,6 +44,13 @@ class Comment
      * @ORM\ManyToOne(targetEntity=User::class)
      */
     private $author;
+
+    /**
+     * @var DateTimeInterface
+     *
+     * @ORM\Column(type="datetime")
+     */
+    private $date;
 
     /**
      * @return int|null
@@ -91,5 +106,21 @@ class Comment
     public function setAuthor(?User $author): void
     {
         $this->author = $author;
+    }
+
+    /**
+     * @return DateTimeInterface|null
+     */
+    public function getDate(): ?DateTimeInterface
+    {
+        return $this->date;
+    }
+
+    /**
+     * @param DateTimeInterface $date
+     */
+    public function setDate(DateTimeInterface $date): void
+    {
+        $this->date = $date;
     }
 }

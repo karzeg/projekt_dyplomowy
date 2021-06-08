@@ -16,34 +16,39 @@
         <div class="logotype">
             <a href="{{ url('musical_index') }}"><img class="logo" src="{{ asset('images/logo.png') }}" alt="logo serwisu"/></a>
         </div>
-        <nav>
-            <label for="drop" class="toggle">Menu</label>
-            <input type="checkbox" id="drop" />
-            <ul class="menu">
-                <li><a href="{{ url('musical_index') }}">Musicale</a></li>
-                <li><a href="{{ url('historia') }}">Historia</a></li>
-                <li>
-                    <label for="drop-1" class="toggle">Ludzie +</label>
-                    <a href="#">Ludzie</a>
-                    <input type="checkbox" id="drop-1"/>
-                    <ul>
-                        <li><a href="{{ url('actor_index') }}">Aktorzy</a></li>
-                        <li><a href="{{ url('composer_index') }}">Kompozytorzy</a></li>
-                        <li><a href="{{ url('director_index') }}">Reżyserzy</a></li>
-                    </ul>
-                </li>
-                <li><a href="{{ url('o-serwisie') }}">O serwisie</a></li>
 
-                {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-                    <li><a href="{{ url('user_show', {id: app.user.id}) }}"> Moje konto </a></li>
-                    <li><a href="{{ url('app_logout') }}">Wyloguj</a></li>
+            <nav class="navbar navbar-expand-lg navbar-light">
+                <div class="container">
+                    <button type="button" data-toggle="collapse" data-target="#navbarContent" aria-controls="navbars" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div id="navbarContent" class="collapse navbar-collapse">
+                        <ul class="navbar-nav mr-auto text-dark">
+                            <li class="nav-item"><a href="{{ url('musical_index') }}" class="nav-link text-dark">Musicale</a></li>
+                            <li class="nav-item"><a href="{{ url('historia') }}" class="nav-link text-dark">Historia</a></li>
+                            <li class="nav-item dropdown">
+                                <a id="dropdownMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle text-dark">Ludzie</a>
+                                <ul aria-labelledby="dropdownMenu1" class="dropdown-menu border-0 shadow">
+                                    <li><a href="{{ url('actor_index') }}" class="dropdown-item">Aktorzy</a></li>
+                                    <li><a href="{{ url('composer_index') }}" class="dropdown-item">Kompozytorzy</a></li>
+                                    <li><a href="{{ url('director_index') }}" class="dropdown-item">Reżyserzy</a></li>
+                                </ul>
+                            </li>
 
-                {% else %}
-                    <li><a href="{{ url('app_login') }}">Zaloguj</a></li>
-                {% endif %}
+                            <li class="nav-item"><a href="{{ url('o-serwisie') }}" class="nav-link text-dark">O serwisie</a></li>
 
-            </ul>
-        </nav>
+                            {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+                                <li class="nav-item"><a href="{{ url('user_show', {id: app.user.id}) }}" class="nav-link text-dark">Moje konto</a></li>
+                                <li class="nav-item"><a href="{{ url('app_logout') }}" class="nav-link text-dark">Wyloguj</a></li>
+
+                            {% else %}
+                                <li class="nav-item"><a href="{{ url('app_login') }}" class="nav-link text-dark">Zaloguj</a></li>
+                            {% endif %}
+
+                        </ul>
+                    </div>
+                </div>
+            </nav>
 
     </header>
 
@@ -53,9 +58,8 @@
 
     <footer>
         <div class="footer-part">
-            <img class="logo" src="{{ asset('images/logo-footer.png') }}" alt="logo serwisu"/>
-            <p>Serwis poświęcony musicalom.</p>
-            <p>Karolina Żeglińska</p>
+            <p>Serwis poświęcony musicalom. <br>
+            Karolina Żeglińska</p>
         </div>
     </footer>
 
@@ -63,6 +67,7 @@
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
 {% endblock %}
 </body>
 </html>

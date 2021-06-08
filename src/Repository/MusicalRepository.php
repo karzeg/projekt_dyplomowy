@@ -47,7 +47,7 @@ class MusicalRepository extends ServiceEntityRepository
     public function queryAll(): QueryBuilder
     {
         return $this->getOrCreateQueryBuilder()
-            ->orderBy('musical.title', 'DESC');
+            ->orderBy('musical.title', 'ASC');
     }
 
     /**

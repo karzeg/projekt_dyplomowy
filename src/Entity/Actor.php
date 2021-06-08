@@ -63,6 +63,11 @@ class Actor
     private $musicals;
 
     /**
+     * @ORM\Column(type="string", length=200)
+     */
+    private $filename;
+
+    /**
      * Actor constructor.
      */
     public function __construct()
@@ -160,6 +165,18 @@ class Actor
         if ($this->musicals->removeElement($musical)) {
             $musical->removeActor($this);
         }
+
+        return $this;
+    }
+
+    public function getFilename(): ?string
+    {
+        return $this->filename;
+    }
+
+    public function setFilename(string $filename): self
+    {
+        $this->filename = $filename;
 
         return $this;
     }

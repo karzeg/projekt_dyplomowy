@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20210601091207 extends AbstractMigration
+final class Version20210608130238 extends AbstractMigration
 {
     public function getDescription() : string
     {
@@ -20,12 +20,12 @@ final class Version20210601091207 extends AbstractMigration
     public function up(Schema $schema) : void
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->addSql('CREATE TABLE actors (id INT AUTO_INCREMENT NOT NULL, name VARCHAR(200) NOT NULL, bio TEXT DEFAULT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
-        $this->addSql('CREATE TABLE comments (id INT AUTO_INCREMENT NOT NULL, musical_id INT NOT NULL, author_id INT UNSIGNED DEFAULT NULL, content LONGTEXT NOT NULL, INDEX IDX_5F9E962A839489F9 (musical_id), INDEX IDX_5F9E962AF675F31B (author_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
-        $this->addSql('CREATE TABLE composers (id INT AUTO_INCREMENT NOT NULL, name VARCHAR(200) NOT NULL, bio TEXT DEFAULT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
-        $this->addSql('CREATE TABLE directors (id INT AUTO_INCREMENT NOT NULL, name VARCHAR(200) NOT NULL, bio TEXT DEFAULT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE actors (id INT AUTO_INCREMENT NOT NULL, name VARCHAR(200) NOT NULL, bio TEXT DEFAULT NULL, filename VARCHAR(200) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE comments (id INT AUTO_INCREMENT NOT NULL, musical_id INT NOT NULL, author_id INT UNSIGNED DEFAULT NULL, content LONGTEXT NOT NULL, date DATETIME NOT NULL, INDEX IDX_5F9E962A839489F9 (musical_id), INDEX IDX_5F9E962AF675F31B (author_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE composers (id INT AUTO_INCREMENT NOT NULL, name VARCHAR(200) NOT NULL, bio TEXT DEFAULT NULL, filename VARCHAR(200) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE directors (id INT AUTO_INCREMENT NOT NULL, name VARCHAR(200) NOT NULL, bio TEXT DEFAULT NULL, filename VARCHAR(200) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE favourites (id INT AUTO_INCREMENT NOT NULL, musical_id INT DEFAULT NULL, INDEX IDX_7F07C501839489F9 (musical_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
-        $this->addSql('CREATE TABLE musicals (id INT AUTO_INCREMENT NOT NULL, title VARCHAR(100) NOT NULL, year INT NOT NULL, place VARCHAR(100) NOT NULL, description TEXT NOT NULL, history TEXT DEFAULT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE musicals (id INT AUTO_INCREMENT NOT NULL, title VARCHAR(100) NOT NULL, year INT NOT NULL, place VARCHAR(100) NOT NULL, description TEXT NOT NULL, history TEXT DEFAULT NULL, filename VARCHAR(200) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE musical_director (musical_id INT NOT NULL, director_id INT NOT NULL, INDEX IDX_25173744839489F9 (musical_id), INDEX IDX_25173744899FB366 (director_id), PRIMARY KEY(musical_id, director_id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE musical_composer (musical_id INT NOT NULL, composer_id INT NOT NULL, INDEX IDX_A3F4E26C839489F9 (musical_id), INDEX IDX_A3F4E26C7A8D2620 (composer_id), PRIMARY KEY(musical_id, composer_id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE musical_actor (musical_id INT NOT NULL, actor_id INT NOT NULL, INDEX IDX_FA46311D839489F9 (musical_id), INDEX IDX_FA46311D10DAF24A (actor_id), PRIMARY KEY(musical_id, actor_id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');

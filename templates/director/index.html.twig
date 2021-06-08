@@ -6,19 +6,27 @@
 
 {% block body %}
     <h1>reżyserzy</h1>
-    <div class="grid-container">
-        {% for director in pagination.items %}
-            <a href="{{ url('director_show', {id: director.id}) }}">
-                <div class="grid-item">
-                    <div class="musical">
-                        {{ director.name }}
-                    </div>
-                </div>
-            </a>
-        {% endfor %}
-    </div>
+    <div class="every-con">
+        <div class="container">
 
-    <div class="pagination">
-        {{ knp_pagination_render(pagination) }}
+            <div class="row text-center text-lg-center">
+                {% for director in pagination.items %}
+
+                    <div class="col-lg-3 col-md-4 col-22 text-lg-center">
+                        <div class="container-href">
+                            <a href="{{ url('director_show', {id: director.id}) }}" class="d-block mb-4 h-200">
+                                <img class="img-fluid img-thumbnail" src="{{ asset('uploads/'~ director.filename) }}" alt="">
+                                {{ director.name }}
+                            </a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+
+        </div>
+
+        <div class="pagination">
+            {{ knp_pagination_render(pagination) }}
+        </div>
     </div>
 {% endblock %}
