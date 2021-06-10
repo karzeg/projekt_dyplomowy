@@ -8,6 +8,10 @@
         {% endblock %}</title>
     {% block stylesheets %}
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     {% endblock %}
 </head>
@@ -30,8 +34,7 @@
                                 <a id="dropdownMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle text-dark">Ludzie</a>
                                 <ul aria-labelledby="dropdownMenu1" class="dropdown-menu border-0 shadow">
                                     <li><a href="{{ url('actor_index') }}" class="dropdown-item">Aktorzy</a></li>
-                                    <li><a href="{{ url('composer_index') }}" class="dropdown-item">Kompozytorzy</a></li>
-                                    <li><a href="{{ url('director_index') }}" class="dropdown-item">Reżyserzy</a></li>
+                                    <li><a href="{{ url('composer_index') }}" class="dropdown-item">Twórcy</a></li>
                                 </ul>
                             </li>
 
@@ -53,6 +56,15 @@
     </header>
 
     <div class="container-fluid">
+        <div class="message">
+            {% for type, messages in app.session.flashBag.all %}
+                {% for message in messages %}
+                    <div class="alert alert-{{ type }} text-center text-lg-center" role="alert">
+                        {{ message|trans }}
+                    </div>
+                {% endfor %}
+            {% endfor %}
+        </div>
         {% block body %}{% endblock %}
     </div>
 

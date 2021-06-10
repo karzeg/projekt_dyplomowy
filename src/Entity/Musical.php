@@ -101,13 +101,6 @@ class Musical
     private $songs;
 
     /**
-     * Director.
-     *
-     * @ORM\ManyToMany(targetEntity=Director::class, inversedBy="musical")
-     */
-    private $director;
-
-    /**
      * Composer.
      *
      * @ORM\ManyToMany(targetEntity=Composer::class, inversedBy="musical")
@@ -140,7 +133,6 @@ class Musical
     public function __construct()
     {
         $this->songs = new ArrayCollection();
-        $this->director = new ArrayCollection();
         $this->composer = new ArrayCollection();
         $this->actor = new ArrayCollection();
         $this->favourites = new ArrayCollection();
@@ -259,46 +251,6 @@ class Musical
                 $song->setMusical(null);
             }
         }
-
-        return $this;
-    }
-
-    /**
-     * Getter for Director.
-     *
-     * @return Collection|Director[] Director
-     */
-    public function getDirector(): Collection
-    {
-        return $this->director;
-    }
-
-    /**
-     * Adder for Director.
-     *
-     * @param Director $director Director
-     *
-     * @return $this
-     */
-    public function addDirector(Director $director): self
-    {
-        if (!$this->director->contains($director)) {
-            $this->director[] = $director;
-        }
-
-        return $this;
-    }
-
-    /**
-     * Remover for Director.
-     *
-     * @param Director $director Director
-     *
-     * @return $this
-     */
-    public function removeDirector(Director $director): self
-    {
-        $this->director->removeElement($director);
 
         return $this;
     }

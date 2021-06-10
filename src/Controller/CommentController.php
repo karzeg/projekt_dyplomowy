@@ -70,7 +70,7 @@ class CommentController extends AbstractController
             $comment->setAuthor($this->getUser());
             $comment->setDate(new \DateTime());
             $this->commentService->save($comment);
-            $this->addFlash('success', 'comment_created_successfully');
+            $this->addFlash('success', 'Komentarz został dodany.');
 
             return $this->redirectToRoute('musical_show', ['id' => $musical->getId()]);
         }

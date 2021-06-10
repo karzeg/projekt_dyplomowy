@@ -16,7 +16,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * Class ComposerController.
  *
- * @Route("/kompozytorzy")
+ * @Route("/tworcy")
  */
 class ComposerController extends AbstractController
 {

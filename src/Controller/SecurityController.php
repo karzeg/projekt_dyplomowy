@@ -21,7 +21,6 @@ class SecurityController extends AbstractController
      * Homepage.
      *
      * @param AuthenticationUtils $authenticationUtils
-     *
      * @return \Symfony\Component\HttpFoundation\Response HTTP response
      *
      * @Route("/", name="home")
@@ -30,6 +29,7 @@ class SecurityController extends AbstractController
     {
         if ($this->getUser()) {
             return $this->redirectToRoute('musical_index');
+
         } else {
             return $this->redirectToRoute('app_login');
         }

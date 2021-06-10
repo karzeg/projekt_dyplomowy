@@ -7,6 +7,8 @@ body
 {
     background-color: #f2f2f2;
     font-size: 20px;
+    font-family: 'Montserrat', sans-serif;
+    /*font-family: 'Varela Round', sans-serif;*/
     color: #2e2e2e;
 }
 
@@ -19,16 +21,6 @@ header
 {
     margin: 0.5em 0 0;
     padding: 0.5em 0 0;
-}
-
-.logotype a
-{
-    color: #2e2e2e;
-}
-
-.logotype a:hover
-{
-    text-decoration: none;
 }
 
 h1
@@ -51,7 +43,7 @@ h1
 .musical-container
 {
     width: 80%;
-    margin: auto;
+    margin: 2em auto ;
 }
 
 .pagination
@@ -63,7 +55,7 @@ h1
 .container-fluid
 {
     width: 100%;
-    margin: 0;
+    margin: 1em 0;
     padding: 0;
 }
 
@@ -86,21 +78,21 @@ h1
     margin-top: 0.5em;
 }
 
-.cover-photo
-{
-    margin: auto;
-    text-align: center;
-    background-color: #ffaa81;
-    padding: 5em;
-}
-
-.name
+h3, .name
 {
     font-size: 3rem;
     font-weight: bold;
     letter-spacing: 0.04em;
     line-height: 3em;
     color: #2e2e2e;
+}
+
+.cover-photo
+{
+    margin: auto;
+    text-align: center;
+    background-color: #ffaa81;
+    padding: 5em;
 }
 
 .creator a
@@ -169,6 +161,7 @@ form
 {
     margin-top: 2em;
 }
+
 .comment
 {
     border: 1px solid #fff;
@@ -202,6 +195,14 @@ form
 {
     margin-bottom: 3em;
 }
+
+.message
+{
+    width: 60%;
+    margin: 3em auto 1em;
+}
+
+
 @media (min-width: 991px)
 {
     .dropdown-menu
@@ -222,5 +223,10 @@ form
     .nav-item:hover
     {
         background-color: #ffaa81;
+    }
+
+    .container
+    {
+        line-height: 1em;
     }
 }

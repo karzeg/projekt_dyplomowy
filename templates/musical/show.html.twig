@@ -6,33 +6,37 @@
 
 {% block body %}
     <div class="musical-container">
-        <div class="musical">
-            <img class="nav-profile-img" src="{{ asset('uploads/'~ musical.filename) }}" alt="">
-        </div>
-        <div class="musical-data">
-            <div class="name">
-                {{ musical.title }}
-            </div>
-            <div class="creator">
-                <h2>Twórcy</h2>
-                {% for director in musical.director %}
-                    <a href="{{ url('director_show', {id: director.id}) }}" title="{{ director.name }}">
-                        {{ director.name }}
-                    </a><br>
-                {% endfor %}
-                {% for composer in musical.composer %}
-                <a href="{{ url('composer_show', {id: composer.id}) }}" title="{{ composer.name }}">
-                    {{ composer.name }}
-                </a><br>
-                {% endfor %}
-            </div>
+        <div class="container">
+            <div class="row">
+                <div class="col col-lg-5 col-md-6 col-sm-12 text-center">
+                    <div class="musical">
+                        <img class="nav-profile-img" src="{{ asset('uploads/'~ musical.filename) }}" alt="">
+                    </div>
+                </div>
+                <div class="col col-lg-4 col-md-4 col-sm-12">
+                    <div class="musical-data">
+                        <div class="name">
+                            {{ musical.title }}
+                        </div>
+                        <div class="creator">
+                            <h2>Twórcy</h2>
+                            {% for composer in musical.composer %}
+                                <a href="{{ url('composer_show', {id: composer.id}) }}" title="{{ composer.name }}">
+                                    {{ composer.name }}
+                                </a><br>
+                            {% endfor %}
+                        </div>
 
-            <div class="premiere">
-                <h2>Premiera</h2>
-                {{ musical.year }}
-                {{ musical.place }}
+                        <div class="premiere">
+                            <h2>Premiera</h2>
+                            {{ musical.year }},
+                            {{ musical.place }}
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
+
 
         <h1>historia</h1>
         <div class="content">

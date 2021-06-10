@@ -33,23 +33,13 @@ class RegistrationController extends AbstractController
     private $userService;
 
     /**
-     * UserData service.
-     *
-     * @var \App\Service\UserDataService
-     */
-    private $userDataService;
-
-    /**
      * RegistrationController constructor.
      *
-     * @param \App\Service\UserService     $userService     User service
-//     * @param \App\Service\UserDataService $userDataService UserData service
+     * @param \App\Service\UserService $userService User service
      */
     public function __construct(UserService $userService)
-//                                , UserDataService $userDataService)
     {
         $this->userService = $userService;
-//        $this->userDataService = $userDataService;
     }
 
     /**
@@ -86,7 +76,7 @@ class RegistrationController extends AbstractController
 //            $user->setUserData($userdata);
             $this->userService->save($user);
 //            $this->userDataService->save($userdata);
-            $this->addFlash('success', 'message_registered_successfully');
+            $this->addFlash('success', 'Dodano użytkownika.');
 
             return $guardHandler->authenticateUserAndHandleSuccess(
                 $user,
