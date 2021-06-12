@@ -22,19 +22,17 @@
             <h2>
                 Spektakle
             </h2>
-            <div class="creator">
-                {% for musicals in composer.musicals %}
-                    <div class="col-lg-3 col-md-4 col-22 text-lg-center">
-                        <div class="container-href">
-                            <a href="{{ url('musical_show', {id: musicals.id}) }}" title="{{ musicals.title }}" class="d-block mb-4 h-200">
-                                <img class="img-fluid img-thumbnail" src="{{ asset('uploads/'~ musicals.filename) }}" alt="">
-                                <div>
-                                    {{ musicals.title }}
-                                </div>
+            <div class="container">
+                <div class="row text-center text-lg-center">
+                    {% for musical in composer.musicals %}
+                        <div class="col-lg-3 col-md-3 col-12 text-lg-center">
+                            <a href="{{ url('musical_show', {id: musical.id}) }}" class="d-block mb-4 h-200">
+                                <img class="img-fluid img-thumbnail" src="{{ asset('uploads/'~ musical.filename) }}" alt="">
+                                {{ musical.title }}
                             </a>
                         </div>
-                    </div>
-                {% endfor %}
+                    {% endfor %}
+                </div>
             </div>
         </div>
     </div>
