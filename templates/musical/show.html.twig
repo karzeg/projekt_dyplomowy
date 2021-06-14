@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-    {{ 'Doceń musical'|trans({'%id%': musical.id|default('')}) }}
+    Doceń musical | Musical
 {% endblock %}
 
 {% block body %}
@@ -13,7 +13,7 @@
                         <img class="nav-profile-img" src="{{ asset('uploads/'~ musical.filename) }}" alt="">
                     </div>
                 </div>
-                <div class="col col-lg-4 col-md-4 col-sm-12">
+                <div class="col col-lg-5 col-md-5 col-sm-12">
                     <div class="musical-data">
                         <div class="name">
                             {{ musical.title }}
@@ -50,8 +50,24 @@
         <h1>utwory</h1>
         <div class="content">
             {% for songs in musical.songs %}
-                {{ songs.title }}
+                <div class="row">
+                    {{ songs.title }}
+                </div>
             {% endfor %}
+        </div>
+
+        <h1>aktorzy</h1>
+        <div class="container">
+            <div class="row text-center text-lg-center">
+                {% for actor in musical.actor %}
+                    <div class="col-lg-3 col-md-4 col-6">
+                        <a href="{{ url('actor_show', {id: actor.id}) }}" title="{{ actor.name }}" class="d-block mb-4 h-200">
+                            <img class="img-fluid img-thumbnail" src="{{ asset('uploads/'~ actor.filename) }}" alt="">
+                            {{ actor.name }}
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
         </div>
 
         <h1>komentarze</h1>
